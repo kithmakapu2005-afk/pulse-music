@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pulse Music</title>
+  <meta name="description" content="Pulse Music is an offline music player for Android. Import your music folders, build playlists and favourites. No account, no internet. Download the APK, v1.3.1." data-template="Pulse Music is an offline music player for Android. Import your music folders, build playlists and favourites. No account, no internet. Download the APK, v{version}.">
+  <meta name="keywords" content="offline music player, Android music player, MP3 player, FLAC player, music library, playlists, APK">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#05050a">
+  <meta name="color-scheme" content="dark">
+  <meta name="application-name" content="Pulse Music">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pulse Music">
+  <meta property="og:title" content="Pulse Music">
+  <meta property="og:description" content="Your music, on your phone, with no internet needed. Import folders, build playlists, save favourites. Download the APK, v1.3.1." data-template="Your music, on your phone, with no internet needed. Import folders, build playlists, save favourites. Download the APK, v{version}.">
+  <meta property="og:image" content="assets/pulse-logo.png">
+  <meta property="og:image:alt" content="Pulse Music logo: headphones on a heartbeat line">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Pulse Music">
+  <meta name="twitter:description" content="Your music, on your phone, with no internet needed. Download the APK, v1.3.1." data-template="Your music, on your phone, with no internet needed. Download the APK, v{version}.">
+  <meta name="twitter:image" content="assets/pulse-logo.png">
+
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="icon" type="image/png" href="assets/pulse-logo.png">
+  <link rel="apple-touch-icon" href="assets/pulse-logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Unbounded:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="js/main.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Pulse Music",
+    "description": "An offline music player for Android. Import music folders, build playlists and favourites, and play your own files with no account and no internet.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Android 8.0 or later",
+    "softwareVersion": "1.3.1",
+    "fileSize": "3.8 MB",
+    "downloadUrl": "downloads/PulseMusic-1.3.1-release.apk",
+    "image": "assets/pulse-logo.png",
+    "featureList": [
+      "Offline music playback",
+      "Personal music library",
+      "Music folder import",
+      "Playlists",
+      "Favourites"
+    ]
+  }
+  </script>
+</head>
+<body data-version="1.3.1">
+  <!--
+    Content in this page is edited with the local admin panel (admin/ folder, "Start Admin.bat").
+    data-edit="…" marks editable text, data-release="…" marks values filled from the APK.
+  -->
+  <!-- Icon sprite (Lucide-style line icons) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15a1 1 0 0 0 1.52.85l12-7.5a1 1 0 0 0 0-1.7l-12-7.5A1 1 0 0 0 7 4.5Z"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1.2"/><rect x="14" y="4" width="4" height="16" rx="1.2"/></symbol>
+      <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="m18 14 4 4-4 4"/><path d="m18 2 4 4-4 4"/><path d="M2 18h1.97a4 4 0 0 0 3.3-1.7l5.45-8.6a4 4 0 0 1 3.3-1.7H22"/><path d="M2 6h1.97a4 4 0 0 1 3.6 2.2"/><path d="M22 18h-6.04a4 4 0 0 1-3.3-1.8l-.36-.45"/></symbol>
+      <symbol id="i-skip-back" viewBox="0 0 24 24"><path d="M18 19.5 9 12l9-7.5Z"/><path d="M5 19V5"/></symbol>
+      <symbol id="i-skip-forward" viewBox="0 0 24 24"><path d="M6 4.5 15 12l-9 7.5Z"/><path d="M19 5v14"/></symbol>
+      <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+      <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+      <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+      <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+      <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></symbol>
+      <symbol id="i-list-music" viewBox="0 0 24 24"><path d="M21 15V6"/><path d="M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/><path d="M12 12H3"/><path d="M16 6H3"/><path d="M12 18H3"/></symbol>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .71-1.53l7-6a2 2 0 0 1 2.58 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+      <symbol id="i-library" viewBox="0 0 24 24"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 12h16"/><path d="M4 6h16"/><path d="M4 18h16"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+      <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/><path d="m16 16-1.9-1.9"/></symbol>
+      <symbol id="i-folder-open" viewBox="0 0 24 24"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/></symbol>
+      <symbol id="i-file-music" viewBox="0 0 24 24"><path d="M10.5 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8l6 6v5"/><path d="M14 2v6h6"/><circle cx="14" cy="18" r="2.5"/><path d="M16.5 18v-6l3 1.2"/></symbol>
+      <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.41 7.59A1.4 1.4 0 0 1 5.42 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.42a1.4 1.4 0 0 1 .99.41l3.39 3.39a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.36 18.36a9 9 0 0 0 0-12.72"/></symbol>
+      <symbol id="i-wifi-off" viewBox="0 0 24 24"><path d="M12 20h.01"/><path d="M8.5 16.43a5 5 0 0 1 7 0"/><path d="M5 12.86a10 10 0 0 1 5.17-2.69"/><path d="M19 12.86a10 10 0 0 0-2-1.52"/><path d="M2 8.82a15 15 0 0 1 4.18-2.64"/><path d="M22 8.82a15 15 0 0 0-11.29-3.76"/><path d="m2 2 20 20"/></symbol>
+      <symbol id="i-note" viewBox="0 0 24 24"><circle cx="8" cy="18" r="4"/><path d="M12 18V2l7 4"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2.5"/><path d="M12 18h.01"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-wave" viewBox="0 0 24 24"><path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"/></symbol>
+      <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+      <symbol id="i-grip" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></symbol>
+      <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></symbol>
+      <symbol id="i-android" viewBox="0 0 24 24"><path d="M5 16V10a7 7 0 0 1 14 0v6"/><path d="M5 13h14"/><path d="m7 5-1.5-2.5"/><path d="m17 5 1.5-2.5"/><circle cx="9" cy="9.5" r=".6"/><circle cx="15" cy="9.5" r=".6"/><path d="M5 16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2"/></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="#home" aria-label="Pulse Music, back to top">
+        <span class="brand-mark"><img src="assets/pulse-logo.png" alt="" width="40" height="40"></span>
+        <span class="brand-word">PULSE<span>MUSIC</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-nav-toggle>
+        <svg class="i" aria-hidden="true"><use href="#i-menu"/></svg>
+        <span class="sr-only">Open menu</span>
+      </button>
+      <div class="nav-menu" id="nav-menu" data-nav-menu>
+        <ul class="nav-links">
+          <li><a href="#home" data-nav-link>Home</a></li>
+          <li><a href="#features" data-nav-link>Features</a></li>
+          <li><a href="#showcase" data-nav-link>App Showcase</a></li>
+          <li><a href="#about" data-nav-link>About</a></li>
+          <li><a href="#download" data-nav-link>Download</a></li>
+        </ul>
+        <a class="btn btn-primary btn-sm nav-cta" href="downloads/PulseMusic-1.3.1-release.apk" download data-release-link>
+          <svg class="i" aria-hidden="true"><use href="#i-download"/></svg>
+          Download APK
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section id="home" class="hero" aria-labelledby="hero-title">
+      <div class="hero-stage" data-hero-stage>
+        <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+        <div class="vinyl-fallback" aria-hidden="true">
+          <div class="vf-ring"></div>
+          <div class="vf-record"><img src="assets/pulse-logo.png" alt="" width="120" height="120"></div>
+        </div>
+        <p class="sr-only">A glossy 3D vinyl record spins on a neon-lit turntable, surrounded by glowing particles, sound-wave rings and a circle of light bars that move with the beat.</p>
+      </div>
+
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow" data-hero-in><span class="pulse-dot" aria-hidden="true"></span><span data-edit="hero.eyebrow">Offline music player for Android</span></p>
+          <h1 id="hero-title" class="hero-title">
+            <span class="ht-line" data-hero-in data-edit="hero.line1">Feel</span>
+            <span class="ht-line" data-hero-in data-edit="hero.line2">every</span>
+            <span class="ht-line ht-grad" data-hero-in data-edit="hero.line3">beat.</span>
+          </h1>
+          <p class="hero-lede" data-hero-in data-edit="hero.lede">Pulse Music plays the songs you already own, straight from your phone. No account, no streaming, no signal needed.</p>
+          <div class="hero-actions" data-hero-in>
+            <a class="btn btn-primary btn-lg btn-shine" href="downloads/PulseMusic-1.3.1-release.apk" download data-release-link>
+              <svg class="i" aria-hidden="true"><use href="#i-download"/></svg>
+              <span>Download APK</span>
+              <span class="btn-meta">v<span data-release="version">1.3.1</span> · <span data-release="size">3.8 MB</span></span>
+            </a>
+            <a class="btn btn-ghost btn-lg" href="#showcase" data-edit="hero.cta2">See the app</a>
+          </div>
+          <ul class="hero-facts" data-hero-in>
+            <li><svg class="i" aria-hidden="true"><use href="#i-wifi-off"/></svg><span data-edit="hero.fact1">Works fully offline</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-android"/></svg><span>Android <span data-release="minAndroid">8.0</span>+</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg><span data-edit="hero.fact3">No account</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="hero-controls" data-hero-in>
+        <button class="chip-btn" type="button" aria-pressed="false" data-beat-toggle>
+          <span class="chip-icon" aria-hidden="true">
+            <svg class="i fill when-off"><use href="#i-play"/></svg>
+            <svg class="i fill when-on"><use href="#i-pause"/></svg>
+          </span>
+          <span class="chip-text"><span class="when-off">Play visualizer demo</span><span class="when-on">Stop demo</span><small>A synth beat made in your browser</small></span>
+        </button>
+        <button class="chip-btn chip-btn-sm" type="button" aria-pressed="false" data-motion-toggle>
+          <span class="when-off">Pause motion</span><span class="when-on">Resume motion</span>
+        </button>
+      </div>
+
+      <a class="scroll-cue" href="#features" aria-label="Scroll to features">
+        <span class="scroll-cue-mouse" aria-hidden="true"><span></span></span>
+      </a>
+    </section>
+
+    <!-- ============ FORMATS MARQUEE ============ -->
+    <section class="formats" aria-label="Audio formats Pulse Music can import">
+      <div class="marquee">
+        <ul class="marquee-track" data-edit="formats">
+          <li>MP3</li><li>FLAC</li><li>M4A</li><li>AAC</li><li>OGG</li><li>OPUS</li><li>WAV</li>
+          <li aria-hidden="true">MP3</li><li aria-hidden="true">FLAC</li><li aria-hidden="true">M4A</li><li aria-hidden="true">AAC</li><li aria-hidden="true">OGG</li><li aria-hidden="true">OPUS</li><li aria-hidden="true">WAV</li>
+          <li aria-hidden="true">MP3</li><li aria-hidden="true">FLAC</li><li aria-hidden="true">M4A</li><li aria-hidden="true">AAC</li><li aria-hidden="true">OGG</li><li aria-hidden="true">OPUS</li><li aria-hidden="true">WAV</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section id="features" class="section features" aria-labelledby="features-title">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="kicker"><span>01</span>Features</p>
+          <h2 id="features-title"><span data-edit="features.title">Everything your music needs.</span> <span class="grad-text" data-edit="features.titleAccent">Nothing it doesn't.</span></h2>
+          <p data-edit="features.intro">Five things, done properly, for the music already on your phone.</p>
+        </header>
+
+        <div class="bento">
+          <article class="card card-offline" data-reveal data-spotlight>
+            <div class="viz-offline" aria-hidden="true">
+              <div class="orb">
+                <span class="orb-ring"></span><span class="orb-ring"></span><span class="orb-ring"></span>
+                <span class="orb-core"><svg class="i"><use href="#i-wifi-off"/></svg></span>
+              </div>
+              <div class="eq-row">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <div class="status-pill"><span class="pulse-dot"></span>Mobile data off · still playing</div>
+            </div>
+            <div class="card-body">
+              <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-wifi-off"/></svg></span>
+              <h3 data-edit="f1.title">Offline music playback</h3>
+              <p data-edit="f1.text">Songs play straight from your phone's storage: on a plane, underground, or with mobile data switched off. Playback carries on in the background, with controls on the lock screen and over Bluetooth.</p>
+              <ul class="tag-list" data-edit="f1.tags">
+                <li>No internet permission</li>
+                <li>Background playback</li>
+                <li>Lock-screen controls</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card card-library" data-reveal data-spotlight>
+            <div class="viz-library" aria-hidden="true">
+              <span class="tile t1"><svg class="i"><use href="#i-note"/></svg></span>
+              <span class="tile t2"><svg class="i"><use href="#i-note"/></svg></span>
+              <span class="tile t3"><svg class="i"><use href="#i-note"/></svg></span>
+            </div>
+            <div class="card-body">
+              <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-library"/></svg></span>
+              <h3 data-edit="f2.title">Personal music library</h3>
+              <p data-edit="f2.text">Your songs, organised into albums and artists. Search songs, artists and albums, and pick up again from Recently Played.</p>
+            </div>
+          </article>
+
+          <article class="card card-import" data-reveal data-spotlight>
+            <div class="viz-import" aria-hidden="true">
+              <div class="tree">
+                <span class="node root"><svg class="i"><use href="#i-folder-open"/></svg>Music</span>
+                <span class="node"><svg class="i"><use href="#i-folder"/></svg>Neon Horizon</span>
+                <span class="node leaf"><svg class="i"><use href="#i-file-music"/></svg>Glass City.flac</span>
+              </div>
+              <span class="import-bar"><span></span></span>
+            </div>
+            <div class="card-body">
+              <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-folder-open"/></svg></span>
+              <h3 data-edit="f3.title">Music folder import</h3>
+              <p data-edit="f3.text">Pick a folder and Pulse brings in every song inside it, subfolders too. You can also pick single files or scan the whole phone. Removing a folder never deletes your files.</p>
+            </div>
+          </article>
+
+          <article class="card card-playlists" data-reveal data-spotlight>
+            <div class="viz-playlists" aria-hidden="true">
+              <div class="pl-cover"><svg class="i"><use href="#i-note"/></svg></div>
+              <ol class="pl-rows">
+                <li><span class="pl-num">1</span><span class="pl-line"><b></b><i></i></span><svg class="i"><use href="#i-grip"/></svg></li>
+                <li class="is-active"><span class="pl-num"><span class="mini-eq"><span></span><span></span><span></span></span></span><span class="pl-line"><b></b><i></i></span><svg class="i"><use href="#i-grip"/></svg></li>
+                <li><span class="pl-num">3</span><span class="pl-line"><b></b><i></i></span><svg class="i"><use href="#i-grip"/></svg></li>
+              </ol>
+            </div>
+            <div class="card-body">
+              <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-list-music"/></svg></span>
+              <h3 data-edit="f4.title">Playlists</h3>
+              <p data-edit="f4.text">Create and name playlists for every mood, rename them whenever you like, and line up songs in the Up Next queue. Deleting a playlist keeps your songs in the library.</p>
+            </div>
+          </article>
+
+          <article class="card card-favs" data-reveal data-spotlight>
+            <div class="viz-favs" aria-hidden="true">
+              <span class="big-heart"><svg class="i fill"><use href="#i-heart"/></svg></span>
+              <span class="heart-ripple"></span><span class="heart-ripple"></span>
+            </div>
+            <div class="card-body">
+              <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg></span>
+              <h3 data-edit="f5.title">Favourites</h3>
+              <p data-edit="f5.text">Tap the heart on any song. Your favourites get their own tab and a place on the Home screen, ready whenever you are.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="also" data-reveal>
+          <p class="also-label" data-edit="features.alsoLabel">Also inside</p>
+          <ul class="chips" data-edit="features.also">
+            <li>Resume where you left off</li>
+            <li>Skip silence</li>
+            <li>Playback speed 0.75×–2×</li>
+            <li>Dark, light &amp; system themes</li>
+            <li>Audio output picker</li>
+            <li>Turntable Now Playing screen</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SHOWCASE ============ -->
+    <section id="showcase" class="section showcase" aria-labelledby="showcase-title">
+      <div class="showcase-glow" aria-hidden="true"></div>
+      <div class="container">
+        <header class="section-head center" data-reveal>
+          <p class="kicker"><span>02</span>App Showcase</p>
+          <h2 id="showcase-title"><span data-edit="showcase.title">Designed like an</span> <span class="grad-text" data-edit="showcase.titleAccent">instrument.</span></h2>
+          <p data-edit="showcase.intro">A neon interface built with Jetpack Compose, on a picture you can switch off. Shown here with sample songs.</p>
+        </header>
+      </div>
+
+      <div class="phones" data-phones tabindex="0" role="region" aria-label="App screens. Scroll sideways on small screens.">
+        <!-- Phone 1: Home -->
+        <figure class="phone phone-left" data-reveal>
+          <div class="phone-frame">
+            <div class="screen" role="img" aria-label="Pulse Music Home screen: a Good Evening greeting, a featured album card, recently played albums, favourite tracks, a mini player and the bottom navigation bar.">
+              <div class="ui" aria-hidden="true">
+                <div class="ui-bg"></div><div class="ui-scrim"></div>
+                <div class="ui-status"><span>21:04</span><span class="ui-sys"><i class="sig"></i><i class="bat"></i></span></div>
+                <div class="ui-top">
+                  <span class="ui-logo"><img src="assets/pulse-logo.png" alt="" loading="lazy" width="44" height="44"></span>
+                  <span class="ui-search"><svg class="i"><use href="#i-search"/></svg>Search songs, artists, albums</span>
+                </div>
+                <div class="ui-greet">
+                  <strong>Good Evening</strong>
+                  <span class="ui-grad">Feel Every Beat.</span>
+                </div>
+                <div class="ui-banner">
+                  <div class="ui-banner-text">
+                    <small>FEATURED ALBUM</small>
+                    <strong>Neon Horizon</strong>
+                    <span>Aria Vale • 4 songs</span>
+                    <div class="ui-banner-actions">
+                      <span class="ui-play-pill"><svg class="i fill"><use href="#i-play"/></svg>Play</span>
+                      <span class="ui-round"><svg class="i"><use href="#i-shuffle"/></svg></span>
+                    </div>
+                  </div>
+                  <span class="ui-art art-a ui-banner-art"><svg class="i"><use href="#i-note"/></svg></span>
+                </div>
+                <div class="ui-dots"><i class="on"></i><i></i><i></i></div>
+                <div class="ui-h"><strong>Recently Played</strong><span>See all <svg class="i"><use href="#i-chevron-right"/></svg></span></div>
+                <div class="ui-cards">
+                  <div><span class="ui-art art-a"><svg class="i"><use href="#i-note"/></svg></span><b>Afterglow</b><small>Aria Vale</small></div>
+                  <div><span class="ui-art art-b"><svg class="i"><use href="#i-note"/></svg></span><b>Static Hearts</b><small>Aria Vale</small></div>
+                  <div><span class="ui-art art-c"><svg class="i"><use href="#i-note"/></svg></span><b>Undertow</b><small>The Tideline</small></div>
+                </div>
+                <div class="ui-h"><strong>Favourite Tracks</strong><span>See all <svg class="i"><use href="#i-chevron-right"/></svg></span></div>
+                <div class="ui-row"><span class="ui-art art-a sm"><svg class="i"><use href="#i-note"/></svg></span><span class="ui-row-text"><b>Midnight Signal</b><small>Aria Vale • Neon Horizon</small></span><small class="ui-dur">3:10</small><svg class="i fill fav"><use href="#i-heart"/></svg></div>
+                <div class="ui-mini">
+                  <span class="ui-art art-b xs"><svg class="i"><use href="#i-note"/></svg></span>
+                  <span class="ui-row-text"><b>Glass City</b><small>Aria Vale</small></span>
+                  <svg class="i fill"><use href="#i-pause"/></svg>
+                  <span class="ui-mini-progress"><span></span></span>
+                </div>
+                <nav class="ui-nav">
+                  <span class="on"><i><svg class="i"><use href="#i-home"/></svg></i>Home</span>
+                  <span><i><svg class="i"><use href="#i-library"/></svg></i>Music</span>
+                  <span><i><svg class="i"><use href="#i-heart"/></svg></i>Favourites</span>
+                  <span><i><svg class="i"><use href="#i-list-music"/></svg></i>Playlists</span>
+                  <span><i><svg class="i"><use href="#i-menu"/></svg></i>More</span>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <figcaption><strong data-edit="phone1.title">Home</strong><span data-edit="phone1.text">Latest albums, recently played and favourites, one swipe away.</span></figcaption>
+        </figure>
+
+        <!-- Phone 2: Now Playing -->
+        <figure class="phone phone-center" data-reveal>
+          <div class="phone-frame">
+            <div class="screen" role="img" aria-label="Pulse Music Now Playing screen: a spinning turntable with a tonearm and the song name scrolling along the rim, then the song title Midnight Signal, a progress bar, playback controls with a glowing play button, and a volume slider.">
+              <div class="ui" aria-hidden="true">
+                <div class="ui-bg"></div><div class="ui-scrim"></div>
+                <div class="ui-status"><span>21:04</span><span class="ui-sys"><i class="sig"></i><i class="bat"></i></span></div>
+                <div class="np-head">
+                  <svg class="i"><use href="#i-chevron-down"/></svg>
+                  <span>NOW PLAYING</span>
+                  <svg class="i"><use href="#i-list-music"/></svg>
+                </div>
+                <div class="tt">
+                  <div class="tt-halo"></div>
+                  <div class="tt-platter"></div>
+                  <div class="tt-ring"></div>
+                  <div class="tt-outer"></div>
+                  <svg class="tt-rim" viewBox="0 0 100 100">
+                    <defs><path id="rim-arc" d="M 5.36 66.25 A 47.5 47.5 0 0 0 94.64 66.25"/></defs>
+                    <text data-rim-text><textPath href="#rim-arc" startOffset="0">Midnight Signal  —  Aria Vale     •     Midnight Signal  —  Aria Vale     •     Midnight Signal  —  Aria Vale     •     </textPath></text>
+                  </svg>
+                  <div class="tt-record">
+                    <div class="tt-band"></div>
+                    <img class="tt-label" src="assets/vinyl-wave.jpg" alt="" loading="lazy" width="120" height="120">
+                    <div class="tt-spindle"></div>
+                  </div>
+                  <div class="tt-sheen"></div>
+                  <svg class="tt-arm" viewBox="0 0 100 100">
+                    <defs>
+                      <linearGradient id="steel" x1="90" y1="80" x2="29" y2="69" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#EDEDF2"/><stop offset="1" stop-color="#8A8A94"/></linearGradient>
+                      <radialGradient id="pivot" cx="90" cy="80" r="6" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#4C4C55"/><stop offset="1" stop-color="#141418"/></radialGradient>
+                    </defs>
+                    <line x1="90" y1="80" x2="100.4" y2="81.8" stroke="#6E6E78" stroke-width="2.2" stroke-linecap="round"/>
+                    <circle cx="100.4" cy="81.8" r="3.4" fill="#26262C" stroke="#B9B9C2" stroke-width=".4"/>
+                    <line x1="90" y1="80" x2="28.94" y2="69.23" stroke="url(#steel)" stroke-width="1.4" stroke-linecap="round"/>
+                    <line x1="28.94" y1="69.23" x2="22.72" y2="65.04" stroke="#34343B" stroke-width="3.6"/>
+                    <line x1="28.94" y1="69.23" x2="22.72" y2="65.04" stroke="#C9C9D1" stroke-width=".8"/>
+                    <circle cx="90" cy="80" r="6" fill="url(#pivot)" stroke="rgba(201,201,209,.55)" stroke-width=".4"/>
+                    <circle cx="90" cy="80" r="2.2" fill="#9C9CA6"/>
+                  </svg>
+                </div>
+                <div class="np-meta">
+                  <div><strong>Midnight Signal</strong><span>Aria Vale • Neon Horizon</span></div>
+                  <svg class="i fill fav"><use href="#i-heart"/></svg>
+                </div>
+                <div class="np-progress"><span class="np-bar"><span></span><i></i></span><span class="np-times"><small>1:07</small><small>3:10</small></span></div>
+                <div class="np-controls">
+                  <svg class="i"><use href="#i-shuffle"/></svg>
+                  <svg class="i fill"><use href="#i-skip-back"/></svg>
+                  <span class="np-play"><span class="spectrum" data-spectrum></span><span class="np-play-btn"><svg class="i fill"><use href="#i-pause"/></svg></span></span>
+                  <svg class="i fill"><use href="#i-skip-forward"/></svg>
+                  <svg class="i"><use href="#i-repeat"/></svg>
+                </div>
+                <div class="np-volume"><svg class="i"><use href="#i-volume"/></svg><span class="np-vol"><span></span><i></i></span></div>
+              </div>
+            </div>
+          </div>
+          <figcaption><strong data-edit="phone2.title">Now Playing</strong><span data-edit="phone2.text">A spinning turntable: the tonearm swings on when music plays and the song's name rides the rim.</span></figcaption>
+        </figure>
+
+        <!-- Phone 3: Add Music -->
+        <figure class="phone phone-right" data-reveal>
+          <div class="phone-frame">
+            <div class="screen" role="img" aria-label="Pulse Music Add Music screen: an import in progress, options to scan this device, import a folder or import audio files, and a list of music folders already in the library.">
+              <div class="ui" aria-hidden="true">
+                <div class="ui-bg"></div><div class="ui-scrim"></div>
+                <div class="ui-status"><span>21:04</span><span class="ui-sys"><i class="sig"></i><i class="bat"></i></span></div>
+                <div class="ui-top">
+                  <span class="ui-back"><svg class="i"><use href="#i-arrow-left"/></svg></span>
+                  <span class="ui-search"><svg class="i"><use href="#i-search"/></svg>Search songs, artists, albums</span>
+                </div>
+                <div class="ui-title">
+                  <strong>Add Music</strong>
+                  <span>Import MP3, FLAC, M4A, OGG, WAV and more. Everything stays on this device.</span>
+                </div>
+                <div class="ui-glass ui-progress-card">
+                  <span class="mini-eq big"><span></span><span></span><span></span><span></span></span>
+                  <span class="ui-row-text"><b>Importing 18 of 42</b><small>Glass City.flac</small><span class="ui-import-bar"><span></span></span></span>
+                </div>
+                <div class="ui-glass ui-option"><span class="ui-opt-icon"><svg class="i"><use href="#i-scan"/></svg></span><span class="ui-row-text"><b>Scan this device</b><small>Find every song stored on your phone</small></span><svg class="i chev"><use href="#i-chevron-right"/></svg></div>
+                <div class="ui-glass ui-option"><span class="ui-opt-icon"><svg class="i"><use href="#i-folder-open"/></svg></span><span class="ui-row-text"><b>Import a folder</b><small>Add a folder and all its subfolders</small></span><svg class="i chev"><use href="#i-chevron-right"/></svg></div>
+                <div class="ui-glass ui-option"><span class="ui-opt-icon"><svg class="i"><use href="#i-file-music"/></svg></span><span class="ui-row-text"><b>Import audio files</b><small>Pick individual songs</small></span><svg class="i chev"><use href="#i-chevron-right"/></svg></div>
+                <div class="ui-glass ui-folders">
+                  <span class="ui-block-title"><svg class="i"><use href="#i-folder"/></svg>Music folders</span>
+                  <span class="ui-folder"><svg class="i"><use href="#i-folder"/></svg><span class="ui-row-text"><b>Music</b><small>128 songs</small></span><svg class="i dim"><use href="#i-trash"/></svg></span>
+                  <span class="ui-folder"><svg class="i"><use href="#i-folder"/></svg><span class="ui-row-text"><b>Neon Horizon</b><small>4 songs</small></span><svg class="i dim"><use href="#i-trash"/></svg></span>
+                </div>
+                <nav class="ui-nav">
+                  <span><i><svg class="i"><use href="#i-home"/></svg></i>Home</span>
+                  <span><i><svg class="i"><use href="#i-library"/></svg></i>Music</span>
+                  <span><i><svg class="i"><use href="#i-heart"/></svg></i>Favourites</span>
+                  <span><i><svg class="i"><use href="#i-list-music"/></svg></i>Playlists</span>
+                  <span class="on"><i><svg class="i"><use href="#i-menu"/></svg></i>More</span>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <figcaption><strong data-edit="phone3.title">Add Music</strong><span data-edit="phone3.text">Scan the phone, import a whole folder or pick single files.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="section about" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div class="about-copy" data-reveal>
+          <p class="kicker"><span>03</span>About</p>
+          <h2 id="about-title"><span data-edit="about.title">Built for the music</span> <span class="grad-text" data-edit="about.titleAccent">you own.</span></h2>
+          <p class="lead" data-edit="about.lead">Pulse Music is a player for the songs already on your phone, made to be fast, good-looking and private.</p>
+          <p data-edit="about.text">There's nothing to sign up for and no catalogue to rent. You bring the files and Pulse turns them into a library you'll enjoy opening, with a spinning turntable, glass panels and a neon glow that follows the beat.</p>
+          <ul class="principles">
+            <li>
+              <span class="p-icon"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></span>
+              <div><h3 data-edit="about.p1.title">Private by design</h3><p data-edit="about.p1.text">Pulse doesn't request Android's Internet permission, and your library lives only on your phone.</p></div>
+            </li>
+            <li>
+              <span class="p-icon"><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg></span>
+              <div><h3 data-edit="about.p2.title">Light on your phone</h3><p data-edit="about.p2.text" data-template="The whole app is a {size} download.">The whole app is a 3.8 MB download.</p></div>
+            </li>
+            <li>
+              <span class="p-icon"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg></span>
+              <div><h3 data-edit="about.p3.title">Made for Android</h3><p data-edit="about.p3.text">Written in Kotlin with Jetpack Compose, and playing through Media3 ExoPlayer.</p></div>
+            </li>
+          </ul>
+        </div>
+
+        <aside class="spec-panel" data-reveal aria-label="Technical details">
+          <div class="spec-head">
+            <span class="spec-dot"></span><span class="spec-dot"></span><span class="spec-dot"></span>
+            <span class="spec-title">pulse-music · spec sheet</span>
+          </div>
+          <dl class="spec-list">
+            <div><dt>Playback engine</dt><dd>Media3 ExoPlayer</dd></div>
+            <div><dt>Interface</dt><dd>Kotlin · Jetpack Compose</dd></div>
+            <div><dt>Library storage</dt><dd>On-device database</dd></div>
+            <div><dt>Internet permission</dt><dd class="ok">Not requested</dd></div>
+            <div><dt>Account</dt><dd class="ok">None needed</dd></div>
+            <div><dt>Formats</dt><dd>MP3 · FLAC · M4A · AAC · OGG · OPUS · WAV</dd></div>
+            <div><dt>Screens</dt><dd>Phone &amp; tablet layouts</dd></div>
+          </dl>
+          <div class="spec-wave" aria-hidden="true">
+            <svg viewBox="0 0 400 60" preserveAspectRatio="none"><path data-spec-wave d="M0 30 L400 30"/></svg>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ DOWNLOAD ============ -->
+    <section id="download" class="section download" aria-labelledby="download-title">
+      <div class="container">
+        <div class="download-card" data-reveal>
+          <div class="download-glow" aria-hidden="true"></div>
+          <div class="download-main">
+            <span class="app-icon"><img src="assets/pulse-logo.png" alt="Pulse Music app icon" width="96" height="96" loading="lazy"></span>
+            <p class="kicker"><span>04</span>Download</p>
+            <h2 id="download-title"><span data-edit="download.title">Get Pulse Music</span> <span class="grad-text" data-release="version">1.3.1</span></h2>
+            <p class="lead" data-edit="download.lead">Install the APK directly on your Android phone. No store account and no sign-up.</p>
+            <a class="btn btn-primary btn-xl btn-shine" href="downloads/PulseMusic-1.3.1-release.apk" download data-release-link>
+              <svg class="i" aria-hidden="true"><use href="#i-download"/></svg>
+              <span>Download APK</span>
+              <span class="btn-meta" data-release="size">3.8 MB</span>
+            </a>
+            <p class="file-name"><code data-release="file">PulseMusic-1.3.1-release.apk</code></p>
+
+            <ol class="steps" data-edit="download.steps">
+              <li><b>Download</b> the APK on your Android phone.</li>
+              <li><b>Open it</b>. If Android asks, allow installs from your browser or file manager.</li>
+              <li><b>Add your music</b>: open Pulse, go to Add Music and import a folder.</li>
+            </ol>
+            <p class="note"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-edit="download.note" data-template="Already have an earlier Pulse? Install {version} over it without uninstalling first, so your library, playlists and favourites stay put.">Already have an earlier Pulse? Install 1.3.1 over it without uninstalling first, so your library, playlists and favourites stay put.</span></p>
+          </div>
+
+          <div class="download-info">
+            <h3>File information</h3>
+            <dl class="info-list">
+              <div><dt>Version</dt><dd><span data-release="version">1.3.1</span> (build <span data-release="build">6</span>)</dd></div>
+              <div><dt>Requires</dt><dd>Android <span data-release="minAndroid">8.0</span> or newer (API <span data-release="minApi">26</span>+)</dd></div>
+              <div><dt>Built for</dt><dd>Android API <span data-release="targetApi">37</span></dd></div>
+              <div><dt>Size</dt><dd><span data-release="size">3.8 MB</span> <span class="muted">(<span data-release="bytes">3,791,220</span> bytes)</span></dd></div>
+              <div><dt>Package</dt><dd><code data-release="package">com.pulsemusic.player</code></dd></div>
+              <div><dt>Processors</dt><dd data-release="abis">arm64-v8a, armeabi-v7a, x86, x86_64</dd></div>
+              <div><dt>Signature</dt><dd data-release="signature">APK Signature Scheme v2 + v3</dd></div>
+              <div class="hash-row">
+                <dt>SHA-256</dt>
+                <dd>
+                  <code class="hash" data-hash data-release="sha256">B5F8D632A2E99D1F1221D84F3FB84BB11D4650CC911C259BE786DD702B369B2F</code>
+                  <button class="copy-btn" type="button" data-copy-hash aria-label="Copy SHA-256 checksum">
+                    <svg class="i when-off" aria-hidden="true"><use href="#i-copy"/></svg>
+                    <svg class="i when-on" aria-hidden="true"><use href="#i-check"/></svg>
+                    <span class="copy-label">Copy</span>
+                  </button>
+                </dd>
+              </div>
+            </dl>
+
+            <h3>What it asks for</h3>
+            <ul class="perm-list" data-edit="download.perms">
+              <li><b>Music and audio</b><span>Only for "Scan this device". Folder and file import work without it.</span></li>
+              <li><b>Background playback</b><span>A media notification and wake lock so music keeps playing with the screen off.</span></li>
+              <li><b>View network state</b><span>Declared by the Media3 playback library. Pulse has no Internet permission, so it can't go online.</span></li>
+            </ul>
+            <p class="sr-status" role="status" aria-live="polite" data-copy-status></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand" href="#home" aria-label="Pulse Music, back to top">
+        <span class="brand-mark"><img src="assets/pulse-logo.png" alt="" width="40" height="40" loading="lazy"></span>
+        <span class="brand-word">PULSE<span>MUSIC</span></span>
+      </a>
+      <p class="footer-tag" data-edit="footer.tag">Feel Every Beat.</p>
+      <nav aria-label="Footer">
+        <ul class="footer-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#showcase">App Showcase</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#download">Download</a></li>
+        </ul>
+      </nav>
+      <p class="footer-note"><span data-edit="footer.note">Pulse Music plays music files stored on your device. It doesn't stream, sell or sync music.</span><br><span data-edit="footer.copyright">© 2026 Pulse Music. Android is a trademark of Google LLC.</span></p>
+    </div>
+  </footer>
+</body>
+</html>
