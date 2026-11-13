@@ -37,6 +37,11 @@ document.addEventListener('click', (e) => {
   if (navToggle.getAttribute('aria-expanded') === 'true' && !e.target.closest('[data-header]')) setNav(false);
 });
 
+/* ---------- admin link: only on this computer, never on the live site or in the admin preview ---------- */
+if (/(^|\.)localhost$|^127\.0\.0\.1$/.test(location.hostname) && window.top === window) {
+  document.querySelectorAll('[data-admin-link]').forEach((el) => { el.hidden = false; });
+}
+
 /* ---------- scrollspy ---------- */
 const navLinks = [...document.querySelectorAll('[data-nav-link]')];
 const sections = navLinks.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
